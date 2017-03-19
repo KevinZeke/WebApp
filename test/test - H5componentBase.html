@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+<title>H5</title>
+<link rel="stylesheet" href="../style/H5componentBase.css">
+<style>
+	body{
+		margin: 0;
+		padding: 0;
+		background: #000;
+	}
+	.iphone{
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		margin: -270px 0 0 -170px;
+		width: 340px;
+		height: 540px;
+		background: #fff;
+	}
+
+/*测试样式,暂留*/
+/* 	.h5_component_base{
+	transition:all 1s;
+}
+.h5_component_base_leave{
+	opacity: 0;
+}
+.h5_component_base_load{
+	opacity: 1;
+} */
+</style>
+<script src="../js/jQ/jquery-3.1.1.min.js"></script>
+<script src="../js/H5componentBase.js"></script>
+<script>
+
+</script>
+</head>
+<body>
+<div class="iphone"></div>
+<script>
+    var cfg={
+    	type:'base',
+    	width:516,
+    	height:306,
+    	bg:'../img/p1_people.png',
+    	css:{
+    		left:20,
+    		bottom:0,
+    		opacity:0
+    	},
+    	center:true,
+    	animateIn:{bottom:80,opacity:1},
+    	animateOut:{bottom:0,opacity:0}
+    }
+	var h5=new H5componentBase('Myname',cfg);
+		h5.appendTo('.iphone');
+
+        var leave=true;
+		$('body').on('click',function () {
+			leave=!leave;
+			$('.h5_component_base').trigger(leave?'onleave':'onload');
+		}).trigger('click');
+</script>
+</body>
+</html>
