@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+<title>H5</title>
+<!-- <link rel="stylesheet" href="../style/H5componentBase.css"> -->
+<link rel="stylesheet" href="../style/H5componentPie.css">
+<style>
+	body{
+		margin: 0;
+		padding: 0;
+		background: #000;
+	}
+	.iphone{
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		margin: -270px 0 0 -170px;
+		width: 340px;
+		height: 540px;
+		background: #fff;
+	}
+
+</style>
+<script src="../js/jQ/jquery-3.1.1.min.js"></script>
+<script src="../js/H5componentBase.js"></script>
+<script src="../js/H5componentPie.js"></script>
+<script>
+
+</script>
+</head>
+<body>
+	<!-- 饼图组件测试 -->
+<div class="iphone"></div>
+<script>
+    var cfg={
+    	type:'pie',
+    	width:400,
+    	height:400,
+    	data:[
+    	    ['JS',.4],
+    	    ['HTML',.15],
+    	    ['CSS',.1],
+    	    ['jQuery',.3],
+            ['NodeJs',.05]
+    	],
+    	css:{
+    		left:20,
+    		bottom:100,
+    		opacity:0
+    	},
+    	center:true,
+    	animateIn:{bottom:'40%',opacity:1},
+    	animateOut:{bottom:0,opacity:0}
+    };
+	var h5=new H5componentPie('Myname',cfg);
+		h5.appendTo('.iphone');
+
+        var leave=true;
+		$('body').on('click',function () {
+			leave=!leave;
+			$('.h5_component').trigger(leave?'onleave':'onload');
+		});
+</script>
+</body>
+</html>

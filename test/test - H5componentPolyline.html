@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+<title>H5</title>
+<!-- <link rel="stylesheet" href="../style/H5componentBase.css"> -->
+<style>
+	body{
+		margin: 0;
+		padding: 0;
+		background: #000;
+	}
+	.iphone{
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		margin: -270px 0 0 -170px;
+		width: 340px;
+		height: 540px;
+		background: #fff;
+	}
+</style>
+<script src="../js/jQ/jquery-3.1.1.min.js"></script>
+<script src="../js/H5componentBase.js"></script>
+<script src="../js/H5componentPolyline.js"></script>
+<link rel="stylesheet" href="../style/H5componentPolyline.css">
+<script>
+
+</script>
+</head>
+<body>
+	<!-- 柱状图组件测试 -->
+<div class="iphone"></div>
+<script>
+    var cfg={
+    	type:'polyline',
+    	width:530,
+    	height:400,
+    	data:[
+    	    ['JS',.4,'#998CC2'],
+    	    ['HTML',.5],
+    	    ['CSS',.33],
+    	    ['jQuery',.4],
+            ['NodeJs',.1]
+    	],
+    	css:{
+    		top:200,
+    		opacity:1,
+    	},
+        center:true,
+    	animateIn:{opacity:1,top:120},
+    	animateOut:{opacity:0,top:200}
+    };
+	var h5=new H5componentPolyline('Myname',cfg);
+		h5.appendTo('.iphone');
+
+        var leave=true;
+		$('body').on('click',function () {
+			leave=!leave;
+			$('.h5_component').trigger(leave?'onleave':'onload');
+		});
+</script>
+</body>
+</html>
