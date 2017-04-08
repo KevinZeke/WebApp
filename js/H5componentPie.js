@@ -76,7 +76,7 @@ var H5componentPie=function( name,cfg )
 		{
 			text.css('bottom',(h-y)/2+6);
 		}
-		text.css('transition','all .5s '+i*.1+'s').css('opacity',0);
+		text.css('transition','all .5s '+i*.1+'s').css('opacity',0).css('color', item[2]);
 	}
 
     //加入一个蒙版层
@@ -85,7 +85,7 @@ var H5componentPie=function( name,cfg )
 	canvas.width=ctx.width=w;
 	canvas.height=ctx.height=h;
 	component.append(canvas);
-	ctx.fillStyle='#D4CACA';
+	ctx.fillStyle='#F6EDED';
 
 
 		function draw(per)
@@ -107,7 +107,9 @@ var H5componentPie=function( name,cfg )
 
 			if(per>=1)
 			{
-				component.find('.text').css('opacity',1);
+				var Pie_text=component.find('.text');
+				H5componentPie.reSort( Pie_text );
+				Pie_text.css('opacity',1);
 			}
 			
 			ctx.fill();
@@ -144,4 +146,34 @@ var H5componentPie=function( name,cfg )
 		})
 
 	return component;
+}
+
+
+//重排项目文本
+H5componentPie.reSort=function( list )
+{
+	//检测相交
+	var compare=function(domA,domB)
+	{
+		var offsetA=$(domA).offset();
+		var offsetB=$(domB).offset();
+		// domA的投影
+		shadowA_x=[offsetA.left,$(domA).width()+offsetA.left];
+		shadowA_y=[offsetA.top,$(domA).height()+offsetA.top];
+		// domB的投影
+		shadowB_x=[offsetB.left,$(domB).width()+offsetB.left];
+		shadowB_y=[offsetB.top,$(domB).height()+offsetB.top];
+
+		var intersect_x=shadowA_x[1]>shadowB_x[0] && shadowA_x[0]<shadowB_x[1];
+		var intersect_y=shadowA_y[1]>shadowB_y[0] && shadowA_y[0]<shadowB_y[1];;
+		return intersect_y&&intersect_x;
+
+	}
+	//重排
+
+	var reSet=function()
+	{
+		//Todo
+	}
+	return;
 }

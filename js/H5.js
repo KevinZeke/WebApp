@@ -20,11 +20,16 @@ var H5=function()
 		};
 		page.appendTo(this.el);
 		this.page.push(page);
+		if(typeof this.whenAddPage === "function")
+		{
+			this.whenAddPage();
+		}
 		return this;
 	};
 	this.addComponent=function(name , cfg)
 	{
 		var cfg= cfg || {};
+		// 对象合成,同名属性后一个参数对象会覆盖前一个
 		cfg=$.extend({type:'base'}, cfg);
 		var component;
 		//注意一个错误:slice方法返回的是一个子数组,所以page实际上是一个包含jq对象的数组,需要用[0]取出来
@@ -36,7 +41,32 @@ var H5=function()
 			break;
 
 			case 'point':
-			//
+			component=new H5componentPoint(name,cfg);
+			break;
+
+			case 'polyline':
+			component=new H5componentPolyline(name,cfg);
+			break;
+
+			case 'pie':
+			component=new H5componentPie(name,cfg);
+			break;
+
+			case 'bar':
+			component=new H5componentBar(name,cfg);
+			break;
+
+			case 'bar_v':
+			component=new H5componentBar_v(name,cfg);
+			break;
+
+			case 'radar':
+			component=new H5componentRadar(name,cfg);
+			break;
+
+			case 'ring':
+			component=new H5componentRing(name,cfg);
+			break;
 
 			default:
 		}
@@ -44,7 +74,7 @@ var H5=function()
 		return this;
 	}
 	//h5对象初始化呈现
-	this.loader=function()
+	this.loader=function( nowPage )
 	{
 		this.el.fullpage({
 		onLeave:function(index, nextIndex, direction)
@@ -59,7 +89,11 @@ var H5=function()
 		});
 		this.page[0].find('.h5_component').trigger('onload');
 		this.el.show();
+		
+		if(nowPage)
+			$.fn.fullpage.moveTo( nowPage );
 		return this;
 	}
+	this.loader=typeof H5_loading === 'function' ? H5_loading  : this.loader;
 	return this;
 }

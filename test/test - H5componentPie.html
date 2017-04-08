@@ -61,7 +61,7 @@
 		$('body').on('click',function () {
 			leave=!leave;
 			$('.h5_component').trigger(leave?'onleave':'onload');
-		});
+		}).trigger('click');
 </script>
 </body>
 </html>

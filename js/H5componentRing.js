@@ -65,7 +65,7 @@ var H5componentRing=function( name,cfg )
 		draw(0);
 
 		var text=$('<div class="text">'+cfg.data[0]+'</div>');
-		var rate=$('<div class="rate">'+cfg.data[1]*100+'%</div>');
+		var rate=$('<div class="rate">'+parseInt(cfg.data[1]*100)+'%</div>');
 		rate.appendTo(text);
 		if(cfg.data[2])
 		{

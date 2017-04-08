@@ -12,8 +12,10 @@ var H5componentPoint=function( name,cfg )
 		point=$('<div class="point point_'+index+'"></div>');
 		per=(val[1]/base*100)+'%';
 		name=$('<div class="name">'+val[0]+'</div>');
-		rate=$('<div class="rate">'+val[1]+'</div>');
-		name.append(rate).appendTo(point);
+		rate=$('<div class="rate">'+parseInt(val[1]*100)+'%</div>');
+		name.prepend(rate).appendTo(point);
+		// 设置字体所占比
+		name.css({fontSize:(val[1]/base)+'em'});
 		point.width(per).height(per);
 		if(val[2])
 		{

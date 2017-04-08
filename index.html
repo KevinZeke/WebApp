@@ -21,52 +21,427 @@
 </script>
 <!-- h5对象,进行内容管理 -->
 <script src="js/H5.js"></script>
-<link rel="stylesheet" href="style/H5.css" type="text.css">
+<script src="js/H5_loading.js"></script>
+<link rel="stylesheet" href="style/H5_loading.css" type="text/css">
+<link rel="stylesheet" href="style/H5.css" type="text/css">
 <!--  -->
 <style>
+	body{
+		margin: 0;
+		padding: 0;
+	}
 	.h5_component_base{
 		position: absolute;
+	}
+	.h5_page{
+		position: relative;
+		background-image: url(img/page-bg.png);
 	}
 	.h5_page_face{
 		background:url(img/bg-face.png) no-repeat;
 		background-size: cover;
+		overflow: hidden;
 	}
+	.h5_component_name_slogan{
+		-webkit-animation: shake 1s infinite  ease-in-out 2s;
+		-o-animation: shake 1s infinite ease-in-out 2s;
+		animation: shake 1s infinite ease-in-out 2s;
+	} 
+	@keyframes shake{
+		0%{transform:rotate(0);}
+		5%{transform:rotate(-5deg);}
+		10%{transform:rotate(5deg);}
+		15%{transform:rotate(-3deg);}
+		20%{transform:rotate(3deg);}
+		25%{transform:rotate(-2deg);}
+		30%{transform:rotate(2deg);}
+		35%{transform:rotate(-0deg);}
+	}
+
+	.h5_component_name_caption{
+		position: absolute;
+		top: 12%;
+		left: 0;
+		background-image: url(img/caption.png);
+		width: 245px;
+		height: 60px;
+		line-height: 45px;
+		text-align: center;
+		color: #fff;
+		font-size: 20px;
+
+	}
+	.h5_component_name_back{
+		-webkit-animation: back 1.5s infinite  ease-in-out 2s;
+		-o-animation: back 1.5s infinite ease-in-out 2s;
+		animation: back 1.5s infinite ease-in-out 2s;
+	} 
+	@keyframes back{
+		0%{transform:translateY(0px);}
+		30%{transform:translateY(20px);}
+		60%{transform:translateY(0px);}
+		/*50%{transform:translateY(20px);}*/
+	}
+	.h5_component_name_ring_s .text{
+		font-size: 14px;
+		height: 20px;
+		line-height: 20px;
+	}
+
 </style>
+</head>
+<body>
+<div class="loading">
+	<div class="double-bounce1"></div>
+	<div class="double-bounce2"></div>
+	<div class="rate">0%</div>
+</div>
+
+
+
 <!-- 主要逻辑 -->
 <script>
 	$(function ()
 	{
 		var ppt=new H5();
+		H5.prototype.whenAddPage=function()
+		{
+			this.addComponent('slide_up',{
+				css:{
+					width:'100%',
+					height:39/2,
+					bottom:0,
+					opacity:0,
+					zIndex:999
+				},
+				bg:'img/slide-up.png',
+				animateIn:{opacity:1},
+				animateOut:{opacity:0}
+			})
+		};
 		ppt
 		.addPage('face')
 		    .addComponent('logo',
 		    {
-		    		center:true,
-		    		width:395,
-		    		height:130,
-		    		bg:'img/face-logo.png'
-		    	
+		    	center:true,
+		    	width:395,
+		    	height:130,
+		    	bg:'img/face_logo.png',
+		    	css:{opacity:0},
+		    	animateIn:{opacity:1,top:'21%'},
+                animateOut:{opacity:0,top:0}	
 		    })
-		.loader();
+		    .addComponent('slogan',{
+		    	center:true,
+		    	width:365,
+		    	height:99,
+		    	bg:'img/slogan.png',
+		    	css:{opacity:0,top:'38%',left:0},
+		    	animateIn:{left:'50%',opacity:1},
+		    	animateOut:{left:0,opacity:0},
+		    	delay:500
+		    })
+		    .addComponent('face_ad_left',{
+		    	width:345,
+		    	height:493,
+		    	bg:'img/ad-left.png',
+		    	css:{left:-100,bottom:-100,opacity:0},
+		    	animateIn:{left:0,bottom:0,opacity:1},
+		    	animateOut:{left:-100,bottom:-100,opacity:0},
+		    	delay:800
+		    })
+		    .addComponent('face_ad_right',{
+		    	width:324,
+		    	height:449,
+		    	bg:'img/ad-right.png',
+		    	css:{right:-100,bottom:-100,opacity:0},
+		    	animateIn:{right:0,bottom:0,opacity:1},
+		    	animateOut:{right:-100,bottom:-100,opacity:0},
+		    	delay:800
+		    })
+		 .addPage()
+		 	.addComponent('caption',{
+		 		text:'核心理念',
+		 	})
+		 	.addComponent('text',{
+		 		width:500,
+		 		height:50,
+		 		center:true,
+		 		text:"IT教育网=只学有用的",
+		 		css:{opacity:0,
+		 			color:'red',
+		 			'text-align':'justify',
+		 			'font-size':'26px',
+		 			'line-height':'50px',
+		 			top:'0%'
+		 		},
+		 		animateIn:{opacity:1,top:'25%'},
+		 		animateOut:{opacity:0,top:'0%'}
+		 	})
+		 	.addComponent('bubble',{
+		 		width:521,
+		 		height:335,
+		 		bg:'img/bubble.png',
+		 		center:true,
+		 		css:{top:'80%',
+		 		    padding:'15px 10px 10px 10px',
+		 		    'text-align':'',
+		 		    color:'#fff',
+		 		    'font-size':'16px',
+		 		    'line-height':'18px',
+		 		    opacity:0
+		 		},
+		 		text:"光荣已发售的《三国志13威力加强版（Romance Of Three Kingdom 13 PK）》（PC/PS4/PS3/Xbox One），已于3月30日，开放了第七弹DLC的配信下载，这次的下载内容，是「川本喜八郎 三国志人偶」的最后一次追加。",
+		 		animateIn:{opacity:1,top:'35%'},
+		 		animateOut:{opacity:0,top:'80%'},
+		 		delay:500
+		 	})
+		 	.addComponent('people',{
+		 		width:515,
+		 		height:315,
+		 		bg:'img/people.png',
+		 		center:true,
+		 		css:{bottom:'0',opacity:0},
+		 		animateIn:{opacity:1,bottom:'8%'},
+		 		animateOut:{opacity:0,bottom:'0%'}
+		 	})
+		 .addPage()
+		 	.addComponent('caption',{text:'课程分布方向'})
+		 	.addComponent('Polyline',{
+		 		type:'polyline',
+		 		center:true,
+		 		width:600,
+		 		height:350,
+		 		data:[['前端开发',.4],['移动处理',.2],['后端处理',.3],['图像处理',.1],['数据处理',.02]],
+		 		css:{top:'47%'}
+		 	})
+		 	.addComponent('msg',{
+		 		text:'课程分布前端开发占到40%',
+		 		css:{
+		 			width:'100%',
+		 			'text-align':'center',
+		 			top:'10%',
+		 			opacity:0
+		 		},
+		 		animateIn:{opacity:1,top:'33%'},
+		 		animateOut:{opacity:0,top:'10%'}
+		 	})
+		 .addPage()
+		 	.addComponent('caption',{text:'移动开发'})
+		 	.addComponent('pie',{
+		 		type:'pie',
+		 		width:300,
+		 		height:300,
+		 		center:true,
+		 		data:[
+			 		
+			 		['ios',.25,'#5ddbd8'],
+			 		['Cocos2d-x',.02,'#7D9CF4'],
+			 		['unity-3d',.02,'#ffad69'],
+			 		['Android',.71,'#ff7676']
+		 		],
+		 		css:{top:'15%',opacity:0},
+		 		animateIn:{top:'40%',opacity:1},
+		 		animateOut:{top:'15%',opacity:0}
+		 	})
+		 	.addComponent('text',{
+		 		text:'移动课程中Android占比最大',
+		 		css:{width:'100%','text-align':'center',top:'75%',opacity:0},
+		 		animateIn:{opacity:1},
+		 		animateOut:{opacity:0},
+		 		delay:1500
+		 	})
+		 .addPage()
+		 	.addComponent('caption',{text:'前端开发'})
+		 	.addComponent('bar',{
+		 		type:'bar',
+		 		data:[
+			 		
+			 		['Javascript',.32,'#5ddbd8'],
+			 		['HTML/CSS',.21,'#7D9CF4'],
+			 		['css3',.1,'#ffad69'],
+			 		['html5',.1,'#ff7676'],
+			 		['jquery',.04,'#ff7676'],
+			 		['webapp',.04,'#ff7676'],
+			 		['nodeJS',.03,'#ff7676'],
+			 		['Bootstrap',.02,'#ff7676'],
+			 		['AngularJS',.02,'#ff7676'],
 
+		 		],
+		 		width:500,
+		 		height:600,
+		 		center:true,
+		 		css:{top:'35%',opacity:0},
+		 		animateIn:{opacity:1},
+		 		animateOut:{opacity:0}
 
+		 	})
+		 .addPage()
+		 	.addComponent('caption',{text:'前端开发'})
+		 	.addComponent('bar_v',{
+		 		type:'bar_v',
+		 		data:[
+			 		
+			 		['Javascript',.32,'#5ddbd8'],
+			 		['css3',.4,'#ffad69'],
+			 		['html5',.4,'#ff7676'],
+			 		['jquery',.04,'#ff7676'],
+			 		['webapp',.04,'#ff7676']
+
+		 		],
+		 		width:600,
+		 		height:500,
+		 		center:true,
+		 		css:{top:'35%',opacity:0},
+		 		animateIn:{opacity:1},
+		 		animateOut:{opacity:0}
+
+		 	})
+		 .addPage()
+		 	.addComponent('caption',{text:'后端处理'})
+		 	.addComponent('radar',{
+		 		type:'radar',
+		 		data:[
+			 		
+			 		['Java',.46,'#5ddbd8'],
+			 		['PHP',.30,'#7D9CF4'],
+			 		['Linux',.1,'#ffad69'],
+			 		['Python',.038,'#ff7676'],
+			 		['c',.03,'#ff7676'],
+			 		['c++',.046,'#ff7676'],
+			 		['Go',.015,'#ff7676']
+		 		],
+		 		width:500,
+		 		height:500,
+		 		center:true,
+		 		css:{top:'35%',opacity:0},
+		 		animateIn:{opacity:1},
+		 		animateOut:{opacity:0}
+		 	})
+		.addPage()
+		 	.addComponent('caption',{text:'报名人数过万课程分布',css:{'padding-left':30}})
+		 	.addComponent('ring',{
+		 		type:'ring',
+		 		data:['总课程',.54,'#F68C8C'],
+		 		width:300,
+		 		height:300,
+		 		center:true,
+		 		css:{top:'25%'}
+		 	})
+		 	.addComponent('msg',{
+		 		text:'64%观看人数过万',
+		 		css:{
+		 			width:'100%',
+		 			'text-align':'center',
+		 			top:'10%',
+		 			opacity:0
+		 		},
+		 		animateIn:{opacity:1,top:'53%'},
+		 		animateOut:{opacity:0,top:'10%'},
+		 		delay:500
+		 	})
+		 	.addComponent('ring_s',{
+		 		type:'ring',
+		 		data:['后端开发',.28,'#F77B4F'],
+		 		width:180,
+		 		height:180,
+		 		center:true,
+		 		css:{top:'60%'}
+		 	})
+		 	.addComponent('ring_s',{
+		 		type:'ring',
+		 		data:['前端开发',.43,'#F77B4F'],
+		 		width:180,
+		 		height:180,
+		 		css:{top:'60%',left:'1%'}
+		 	})
+		 	.addComponent('ring_s',{
+		 		type:'ring',
+		 		data:['移动开发',.22,'#F77B4F'],
+		 		width:180,
+		 		height:180,
+		 		css:{top:'60%',right:'1%'}
+		 	})
+		 	.addComponent('ring_s',{
+		 		type:'ring',
+		 		data:['图像处理',.04,'#F77B4F'],
+		 		width:180,
+		 		height:180,
+		 		css:{top:'75%',right:'18%'}
+		 	})
+		 	.addComponent('ring_s',{
+		 		type:'ring',
+		 		data:['数据处理',.03,'#F77B4F'],
+		 		width:180,
+		 		height:180,
+		 		css:{top:'75%',left:'18%'}
+		 	})
+		 .addPage()
+			.addComponent('caption',{text:'课程难度级别分布'})
+			.addComponent('point',{
+				type:'point',
+				width:300,
+				height:300,
+				data:[
+					['中级课程',.45,'#F3677E'],
+					['高级课程',.35,'#ACACEF','55%','-90%'],
+					['初级课程',.25,'#EBBCBC','-40%','-70%']
+
+				],
+				center:true,
+				css:{top:'50%',color:'#fff','font-size':20},
+			})
+
+		 .addPage('tail')
+		 	.addComponent('back',{
+		 		width:52,
+		 		height:50,
+		 		center:true,
+		 		bg:'img/back.png',
+		 		css:{top:'0%',opacity:0},
+		 		animateIn:{opacity:1,top:'4%'},
+		 		animateOut:{opacity:0,top:'0%'},
+		 		delay:500,
+		 		onclick:function(){$.fn.fullpage.moveTo(1);}
+		 	})
+		 	.addComponent('share',{
+		 		width:128,
+		 		height:120,
+		 		bg:'img/share.png',
+		 		css:{top:'2%',right:'0%',opacity:0},
+		 		animateIn:{opacity:1,right:'6%'},
+		 		animateOut:{opacity:0,right:'0%'},
+		 		delay:500
+		 	})
+		 	.addComponent('title',{
+		 		width:422,
+		 		height:106,
+		 		bg:'img/title.png',
+		 		center:true,
+		 		css:{top:0,opacity:0},
+		 		animateIn:{top:'36%',opacity:1},
+		 		animateOut:{top:0,opacity:0}
+		 	})
+		 	.addComponent('slogan',{
+		 		width:350,
+		 		height:50,
+		 		text:'期待与你合作',
+		 		center:true,
+		 		css:{top:'50%','text-align':'center','font-size':'25px',opacity:0},
+		 		animateIn:{opacity:1},
+		 		animateOut:{opacity:0},
+		 		delay:500
+		 	})
+
+		.loader(
+			['img/page-bg.png','img/bg-face.png','img/caption.png','img/slide-up.png','img/face_logo.png','img/slogan.png','img/ad-left.png','img/ad-right.png','img/bubble.png','img/people.png','img/back.png','img/share.png','img/title.png']
+			);
+
+		
 
 
 
 	});
 </script>
-
-<style>
-body{
-	margin: 0;
-	padding: 0;
-}
-</style>
-<script>
-</script>
-</head>
-<body>
-
-
 </body>
 </html>

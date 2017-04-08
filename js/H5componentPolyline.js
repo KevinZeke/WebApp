@@ -56,55 +56,6 @@ var H5componentPolyline=function( name,cfg )
     canvas.height=ctx.height= h;
 
     component.append(canvas);
-    
-/*    var ny=[],
-        arr=[];
-    for(var j=0;j<data_length;j++)
-    {
-    	ny[j]=h;
-    	arr[j]=h-cfg.data[j][1]*h;
-    }
-    var timer=setInterval(function()
-    	{
-    		ctx.clearRect(0,0,w,h);
-		    ctx.beginPath();
-		    ctx.lineWidth=3;
-
-		    ctx.strokeStyle="#E76868";
-		    var radius=10;//圆半径
-		    for(var i=0;i<data_length;i++)
-		    {
-		    	x=w/(data_length+1)*(i+1);
-		    	y=h-cfg.data[i][1]*h;
-		    	//起笔位置重置到圆的右面
-		    	if(ny[i]!=y)
-		    	{
-		    		ny[i]=ny[i]-4;
-		    	}
-		    	ctx.moveTo(x+10,ny[i]);
-		    	ctx.arc(x,ny[i],radius,0,2*Math.PI,false);
-		    	ctx.fillStyle=cfg.data[i][2]?cfg.data[i][2]:'#5858BA';
-		    	ctx.fillText(cfg.data[i][1]*100+'%',x,y-2*radius);
-		    }
-		    //重新起笔画线
-		    ctx.moveTo(w/(data_length+1),ny[0]);
-		    for(var i=0;i<data_length;i++)
-		    {
-		    	x=w/(data_length+1)*(i+1);
-		    	y=h-cfg.data[i][1]*h;
-		    	ctx.lineTo(x,ny[i]);
-		    	
-		    }
-		    ctx.stroke();
-		    if(Math.min.apply(null,ny)==Math.min.apply(null,arr))
-		    {
-		    	clearInterval(timer);
-		    }
-		    
-    	},30)*/
-
-
-
 		function draw(per)
 		{
 		    ctx.beginPath();
